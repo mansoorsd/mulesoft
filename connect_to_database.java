@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) {
         try{
             Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/mansoor/IdeaProjects/SQLite_p/TestDB.db");
+            conn.close()
         }
         catch (SQLException e) {
             System.out.println("Something went wrong" +e.getMessage());
