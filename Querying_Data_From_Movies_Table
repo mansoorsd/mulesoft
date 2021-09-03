@@ -1,0 +1,39 @@
+package com.company;
+
+import java.sql.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/mansoor/IdeaProjects/SQLite_p/TestDB.db");
+            Statement statement = conn.createStatement();
+
+            // Selecting all rows in Movies Table
+            statement.execute("CREATE TABLE IF NOT EXISTS Movies" +
+                    "(name TEXT, actor TEXT, actress TEXT, director TEXT, year_of_release INTEGER)");
+            ResultSet results = statement.executeQuery("SELECT * FROM Movies");
+            while (results.next()) {
+                System.out.println(results.getString("name") + " " +
+                        results.getString("actor") + " " +
+                        results.getString("actress") + " " +
+                        results.getInt("year_of_release"));
+            }
+            results.close();
+
+            System.out.println("***************************************************************");
+
+            //Selecting Movies of specific actor
+            ResultSet results1 = statement.executeQuery("SELECT name FROM Movies WHERE actor=='Tom Hanks'");
+            while (results1.next()) {
+                System.out.println(results.getString("name"));
+            }
+            results1.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("Something went wrong" + e.getMessage());
+
+        }
+    }
+}
