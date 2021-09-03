@@ -12,6 +12,8 @@ public class Main {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/mansoor/IdeaProjects/SQLite_p/TestDB.db");
             Statement statement =conn.createStatement();
             statement.execute("CREATE TABLE Movies (name TEXT, actor TEXT, actress TEXT, director TEXT, year_of_release INTEGER)");
+            statement.close();
+            conn.close();
 
         }
         catch (SQLException e) {
